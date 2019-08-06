@@ -8,9 +8,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 //mongo connection
-let url = "mongodb://localhost:27017/rup"
+let uri = "mongodb+srv://nextron:nextron@nextron-xwdga.mongodb.net/test?retryWrites=true&w=majority";
+//let url = "mongodb://localhost:27017/rup"
 
-mongoose.connect(url, {useNewUrlParser: true}, function(err){
+mongoose.connect(uri, {useNewUrlParser: true}, function(err){
     if (err) console.log(err);
     console.log("db connected");
 });
