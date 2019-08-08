@@ -1,0 +1,15 @@
+add produdct validation
+resposne handling
+
+add product response : make it better
+
+our code only works if everything is good
+need to handle exceptions 
+negative response
+
+
+//functionality
+login/logout=>mani
+delete/add/sell=>ravi
+
+pagination, lazy loading
