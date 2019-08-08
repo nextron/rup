@@ -1,7 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
+
+//Enable cors
+app.use(cors());
 
 //body parser
 app.use(bodyParser.json());
@@ -9,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 //mongo connection
 let uri = "mongodb+srv://nextron:nextron@nextron-xwdga.mongodb.net/test?retryWrites=true&w=majority";
-//let url = "mongodb://localhost:27017/rup"
+//let uri = "mongodb://localhost:27017/rup"
 
 mongoose.connect(uri, {useNewUrlParser: true}, function(err){
     if (err) console.log(err);
