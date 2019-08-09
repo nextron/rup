@@ -13,7 +13,11 @@ exports.add = function(req,res){
         res.send({"success":"false","msg" : "Please provide the details"});
     }
     else {
-        Product.findOne().sort({prod_id: -1}).limit(1).then((result) => {
+        Product.find().sort({prod_id: -1}).limit(1).then((result) => {
+            //console.log(result.prod_id);
+            if(result.prod_id==null){
+                result.prod_id=0;
+            }
             let newProduct = new Product({
                 prod_id: result.prod_id + 1,
                 prod_name: req.body.prod_name,
@@ -75,11 +79,17 @@ exports.add = function(req,res){
 }
 
 exports.getProductId = function (req,res){
-    Product.findOne().sort({prod_id:-1}).limit(1).exec((err,product)=> {
-        let product_id = product.prod_id+1;
-        res.send(JSON.stringify(product_id));
-    })
-
+    //res.send("1");
+    Product.countDocuments((err,count)=>{
+        if(count==0){
+            res.send(JSON.stringify((1)))
+        }else{
+            Product.findOne().sort({prod_id:-1}).limit(1).exec((err,product)=> {
+                let product_id = product.prod_id+1;
+                res.send(JSON.stringify(product_id));
+            });
+        }
+    });
 }
 
 
@@ -90,7 +100,5 @@ exports.deleteProduct = function(req,res){
         console.log('product deleted');
     }
     )
-
     res.send(req.body);
-
 }
