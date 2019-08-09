@@ -79,4 +79,18 @@ exports.getProductId = function (req,res){
         let product_id = product.prod_id+1;
         res.send(JSON.stringify(product_id));
     })
+
+}
+
+
+exports.deleteProduct = function(req,res){
+    //here your code
+    console.log(req.body);
+    Product.findOneAndDelete({'prod_id': req.body['id']}).then( () => {
+        console.log('product deleted');
+    }
+    )
+
+    res.send(req.body);
+
 }
