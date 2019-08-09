@@ -8,4 +8,6 @@ const product_controller = require('../controllers/productInventory.controller')
 router.get('/', product_controller.list);
 router.get('/getProductId',product_controller.getProductId);
 router.post('/add',product_controller.add);
+//delete
+router.delete('/delete',product_controller.deleteProduct);
 module.exports = router;
