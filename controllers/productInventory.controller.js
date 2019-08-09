@@ -79,6 +79,7 @@ exports.getProductId = function (req,res){
         let product_id = product.prod_id+1;
         res.send(JSON.stringify(product_id));
     })
+
 }
 
 
@@ -91,4 +92,5 @@ exports.deleteProduct = function(req,res){
     )
 
     res.send(req.body);
+
 }
