@@ -8,6 +8,30 @@ exports.list = function (req, res) {
 };
 
 exports.add = function(req,res){
+    if(req.body.prod_name==null || req.body.prod_brand==null || req.body.current_quantity==null || req.body.price==null){
+        console.log("Please provide the details");
+        res.send({"success":"false","msg" : "Please provide the details"});
+    }
+    else {
+        Product.findOne().sort({prod_id: -1}).limit(1).then((result) => {
+            let newProduct = new Product({
+                prod_id: result.prod_id + 1,
+                prod_name: req.body.prod_name,
+                prod_brand: req.body.prod_brand,
+                current_quantity: req.body.current_quantity,
+                price: req.body.price
+            });
+            //console.log(newProduct);
+            newProduct.save().then(() => {
+                console.log("Product added");
+                res.status(200).send({"success": "true", "msg": "Product added"});
+            }).catch((err)=>{
+                res.send({"success": "false", "msg": "Product not added, somthing went wrong"});
+            });
+        }).catch((err) => {
+            res.send({"success": "false", "msg": "Product not added, somthing went wrong"});
+        });
+    }
     //to add a product to product inventory
     /*_let newProduct = new Product({
         prod_id : 3,
@@ -16,7 +40,7 @@ exports.add = function(req,res){
         current_quantity : 21122,
         price: 300
     });*/
-    let productId = 0;
+    //let productId = 0;
     /*Product.findOne().sort({prod_id:-1}).limit(1).exec((err,product)=> {
         console.log(product.prod_id)});
     //getProductId().then((result)=>{console.log(result)});
@@ -38,24 +62,13 @@ exports.add = function(req,res){
     //getProductId().then((res)=>{productId=res});
     //console.log(getProductId());
     //console.log(productId);
-    Product.findOne().sort({prod_id:-1}).limit(1).then((result)=>{
-        let newProduct = new Product({
-            prod_id : result.prod_id+1,
-            prod_name : req.body.prod_name,
-            prod_brand : req.body.prod_brand,
-            current_quantity : req.body.current_quantity,
-            price: req.body.price
-        });
-        //console.log(newProduct);
-        newProduct.save().then(()=>{console.log("Product added"); res.send({"msg" : "Product added"});});
-    }).catch((err)=>{if(err) throw err;});
-    let newProduct = new Product({
+    /*let newProduct = new Product({
         prod_id : productId,
         prod_name : req.body.prod_name,
         prod_brand : req.body.prod_brand,
         current_quantity : req.body.current_quantity,
         price: req.body.price
-    });
+    });*/
     //console.log(newProduct);
     //newProduct.save().then(()=>{res.send("Product added")});
     //res.send("test");
