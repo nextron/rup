@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const jwt = require('jsonwebtoken');
 
 //Enable cors
 app.use(cors());
@@ -10,6 +11,17 @@ app.use(cors());
 //body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(async (req) => {
+    try {
+        const token = req.headers.authorization
+        const decoded = await jwt.verify(token, 'shhhhh')
+        req.id = decoded.user;
+        return req.next()
+    } catch (e) {
+        return req.next()
+    }
+})
 
 //mongo connection
 let uri = "mongodb+srv://nextron:nextron@nextron-xwdga.mongodb.net/test?retryWrites=true&w=majority";

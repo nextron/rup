@@ -3,14 +3,14 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
 exports.login = function (req,res) {
-    if(req.body.id == "mani"){
+    if(req.body.userId == "mani"){
         hash = "$2b$10$Jsh7W2r0LZD7egl4SRp2n.r8fZZTp/ZbIHui0VP8a67mQwukgQkUS";
         bcrypt.compare(req.body.password, hash, function(err, result) {
             if(result) {
-                var tokenId = jwt.sign({ user: req.body.id }, 'shhhhh');
+                var tokenId = jwt.sign({ user: req.body.userId }, 'shhhhh');
                 //to check if its  a valid user
-                /*var decoded = jwt.verify(tokenId, 'shhhhh');
-                console.log(decoded.user)*/
+                var decoded = jwt.verify(tokenId, 'shhhhh');
+                console.log(decoded.user);
                 res.send({success : "true", token: tokenId ,msg : "valid user"});
             }else{
                 res.send({sucess : "false", msg : "Password is not valid"});
