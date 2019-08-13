@@ -26,8 +26,10 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 //console.log(db.products_inventory.find());
 
 //handle product inventory route
-const productInventory = require("./routes/productInventory.route");
-app.use('/products',productInventory);
+const productInventoryRoute = require("./routes/productInventory.route");
+app.use('/products',productInventoryRoute);
+const loginRoute = require("./routes/login.route");
+app.use('/login',loginRoute);
 
 //app.listen(3000);
 const port = 3000;
