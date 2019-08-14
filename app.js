@@ -36,11 +36,14 @@ app.use(async (req,res,next) => {
     try {
         const token = req.headers.authorization;
         const decoded = await jwt.verify(token, 'shhhhh')
-        req.id = decoded.user;
-        next();
+        if(decoded.user=="mani"){
+            next();
+        }else{
+            res.send({success:"false",msg:"Please Login with a valid user"});
+        }
         //return res.send("success")
     } catch (e) {
-        return res.send({success:"false",msg:"Please Login First"});
+        res.send({success:"false",msg:"Please Login First"});
     }
 })
 
