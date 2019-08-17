@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const product_controller = require('../controllers/productInventory.controller');
+const productController = require('../controllers/productInventory.controller');
 
 
 // a simple test url to check that all of our files are communicating correctly.
-router.get('/', product_controller.list);
-router.get('/getProductId',product_controller.getProductId);
-router.post('/add',product_controller.add);
+router.get('/', productController.list);
+router.get('/getProductId',productController.getProductId);
+router.post('/add',productController.add);
 //delete
-router.delete('/delete',product_controller.deleteProduct);
+router.delete('/delete',productController.deleteProduct);
 module.exports = router;

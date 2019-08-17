@@ -32,7 +32,7 @@ const loginRoute = require("./routes/login.route");
 app.use('/login',loginRoute);
 
 //To verify every req if user is logged in or not
-app.use(async (req,res,next) => {
+/*app.use(async (req,res,next) => {
     try {
         const token = req.headers.authorization;
         const decoded = await jwt.verify(token, 'shhhhh')
@@ -45,11 +45,15 @@ app.use(async (req,res,next) => {
     } catch (e) {
         res.send({success:"false",msg:"Please Login First"});
     }
-})
+})*/
 
 //handle product inventory route
 const productInventoryRoute = require("./routes/productInventory.route");
 app.use('/products',productInventoryRoute);
+
+//handle add and sell products route
+const productTransactionRoute = require("./routes/productTransactions.route");
+app.use('/transaction',productTransactionRoute);
 
 //app.listen(3000);
 const port = 3000;
