@@ -21,9 +21,9 @@ exports.getProductsSold = function(req,res){
 }
 
 exports.add = function(req,res){
-    if(req.body.prod_id==null || req.body.quantity_add==null){
+    if(req.body.prod_id==null || req.body.quantity_add==null || req.body.quantity_add<1){
         console.log("Please provide the details");
-        res.send(req.prod_id +" "+ req.quantity_add);
+        //res.send(req.prod_id +" "+ req.quantity_add);
         res.send({success : "false" , msg : "Please provide the details" , controller: "transaction"});
     }else{
         let newTranaction = new transactionsModel({

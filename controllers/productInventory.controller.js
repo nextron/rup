@@ -93,3 +93,14 @@ exports.deleteProduct = function(req,res){
     )
     res.send(req.body);
 }
+
+exports.search = function(req,res){
+    //res.send(req.query.prod_name);
+    str =  req.query.prod_name;
+    //console.log(str);
+    Product.find({prod_name: new RegExp(str,'i')},'prod_id prod_name price').exec((err,products)=>{
+        //console.log(err);
+        //console.log(products);
+        res.send(products);
+    })
+}
