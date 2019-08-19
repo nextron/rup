@@ -104,3 +104,9 @@ exports.search = function(req,res){
         res.send(products);
     })
 }
+
+exports.getProductById = function (req,res) {
+    Product.find({prod_id : req.query.prod_id}).exec((err, product)=>{
+        res.send(product);
+    })
+}
