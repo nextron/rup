@@ -59,9 +59,10 @@ exports.add = function(req,res){
 exports.sell = function(req,res){
     if(req.body.prod_id == null || req.body.quantity_sold == null || req.body.company_sell == null){
         console.log("Please provide the details");
-        res.send(req.body.prod_id +" "+ req.body.quantity_sold);
+        //res.send(req.body);
         res.send({success : "false" , msg : "Please provide the details" , controller: "transaction"});
     }else{
+        //res.send(req.body);
         let newTranaction = new transactionsModel({
             prod_id: req.body.prod_id,
             quantity_add: 0,
